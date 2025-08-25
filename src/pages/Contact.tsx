@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, Github } from 'lucide-react';
 import SplineBackground from '../components/SplineBackground';
 import { portfolioData, splineBackgrounds } from '../data/portfolioData';
+import { getDeviceInfo, shouldReduceMotion, getOptimizationLevel } from '../utils/deviceDetection';
 
 const Contact: React.FC = () => {
   const { personal } = portfolioData;
+  const [isMobile, setIsMobile] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
+  const [optimizationLevel, setOptimizationLevel] = useState<'very-low' | 'low' | 'medium' | 'high'>('high');
+
+  useEffect(() => {
+    const deviceInfo = getDeviceInfo();
+    const optLevel = getOptimizationLevel();
+    
+    setIsMobile(deviceInfo.isMobile);
+    setReduceMotion(shouldReduceMotion());
+    setOptimizationLevel(optLevel);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -59,80 +72,274 @@ const Contact: React.FC = () => {
     }
   ];
 
+  // For very low-end devices, show a simplified version
+  if (optimizationLevel === 'very-low') {
+    return (
+      <div className="min-h-screen pt-14 pb-8 relative">
+        {/* Spline 3D Background */}
+        <SplineBackground 
+          src={splineBackgrounds.contact} 
+          className="opacity-90"
+          mobileOptimized={true}
+        />
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-6">
+            <h1 className="text-xl font-bold gradient-text mb-2">
+              Get In Touch
+            </h1>
+            <p className="text-sm text-gray-300">
+              Let's collaborate and bring your ideas to life
+            </p>
+          </div>
+
+          {/* Contact Information */}
+          <div className="glass rounded-lg p-3 shadow-neon">
+            <h2 className="text-base font-bold gradient-text mb-3 text-center">
+              Contact Information
+            </h2>
+            <p className="text-gray-300 mb-4 text-center text-xs">
+              Ready to start your next project? Feel free to reach out!
+            </p>
+            
+            <div className="space-y-3">
+              {contactItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : '_self'}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                  className="flex items-center p-2 glass rounded-lg hover:shadow-neon transition-all duration-300"
+                >
+                  <div className={`p-1.5 rounded ${item.color} bg-white/10 mr-2`}>
+                    <item.icon className="w-3 h-3" />
+                  </div>
+                  <div>
+                    <p className={`font-medium ${item.color} text-xs`}>{item.label}</p>
+                    <p className="text-gray-300 text-xs">
+                      {item.value}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+            
+            {/* Availability Status */}
+            <div className="mt-4 text-center">
+              <div className="inline-flex items-center px-2 py-1 bg-secondary-400/20 text-secondary-400 rounded-lg text-xs">
+                <div className="w-1.5 h-1.5 bg-secondary-400 rounded-full mr-1 animate-pulse"></div>
+                Available for new projects
+              </div>
+              <p className="text-gray-400 text-xs mt-1">
+                Currently based in Chennai, India • Remote collaboration
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // For low-end devices, show a simplified version
+  if (reduceMotion || optimizationLevel === 'low') {
+    return (
+      <div className="min-h-screen pt-16 pb-12 relative">
+        {/* Spline 3D Background */}
+        <SplineBackground 
+          src={splineBackgrounds.contact} 
+          className="opacity-80"
+          mobileOptimized={true}
+        />
+        
+        <div className="relative z-10 max-w-6xl mx-auto px-4">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-2xl font-bold gradient-text mb-3">
+              Get In Touch
+            </h1>
+            <p className="text-base text-gray-300">
+              Let's collaborate and bring your ideas to life
+            </p>
+          </div>
+
+          {/* Contact Information */}
+          <div className="glass rounded-xl p-4 shadow-neon">
+            <h2 className="text-lg font-bold gradient-text mb-4 text-center">
+              Contact Information
+            </h2>
+            <p className="text-gray-300 mb-5 text-center text-sm">
+              Ready to start your next project? Feel free to reach out!
+            </p>
+            
+            <div className="space-y-4">
+              {contactItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : '_self'}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                  className="flex items-center p-3 glass rounded-lg hover:shadow-neon transition-all duration-300"
+                >
+                  <div className={`p-2 rounded ${item.color} bg-white/10 mr-3`}>
+                    <item.icon className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className={`font-medium ${item.color} text-sm`}>{item.label}</p>
+                    <p className="text-gray-300 text-xs">
+                      {item.value}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+            
+            {/* Availability Status */}
+            <div className="mt-6 text-center">
+              <div className="inline-flex items-center px-3 py-1.5 bg-secondary-400/20 text-secondary-400 rounded-lg text-sm">
+                <div className="w-2 h-2 bg-secondary-400 rounded-full mr-2 animate-pulse"></div>
+                Available for new projects
+              </div>
+              <p className="text-gray-400 text-xs mt-2">
+                Currently based in Chennai, India • Remote collaboration
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Full animation version for desktop/high-performance devices
   return (
     <div className="min-h-screen pt-20 pb-16 relative">
       {/* Spline 3D Background */}
       <SplineBackground 
         src={splineBackgrounds.contact} 
-        className="opacity-80"
+        className="opacity-70"
+        mobileOptimized={true}
       />
       
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-20 max-w-4xl mx-auto px-6">
+        {/* Animated Header */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="space-y-16"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          {/* Header */}
-          <motion.div variants={itemVariants} className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold gradient-text mb-6">
-              Get In Touch
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Let's collaborate and bring your ideas to life. I'm always excited to work on new projects and challenges.
-            </p>
+          <h1 className="text-5xl font-bold gradient-text mb-6">
+            Get In Touch
+          </h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Let's collaborate and bring your ideas to life
+          </p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={containerVariants}
+          >
+            <div className="glass rounded-2xl p-8 shadow-neon">
+              <motion.h2
+                variants={itemVariants}
+                className="text-2xl font-bold gradient-text mb-8"
+              >
+                Contact Information
+              </motion.h2>
+              
+              <motion.p
+                variants={itemVariants}
+                className="text-gray-300 mb-10 text-lg"
+              >
+                Ready to start your next project? Feel free to reach out! I'm always excited 
+                to discuss new opportunities and creative collaborations.
+              </motion.p>
+              
+              <motion.div
+                variants={containerVariants}
+                className="space-y-6"
+              >
+                {contactItems.map((item, index) => (
+                  <motion.a
+                    key={index}
+                    variants={itemVariants}
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : '_self'}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
+                    className="flex items-center p-4 glass rounded-xl hover:shadow-neon transition-all duration-300 group"
+                  >
+                    <div className={`p-3 rounded-xl ${item.color} bg-white/10 mr-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <item.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className={`font-bold ${item.color} text-lg`}>{item.label}</p>
+                      <p className="text-gray-300">
+                        {item.value}
+                      </p>
+                    </div>
+                  </motion.a>
+                ))}
+              </motion.div>
+              
+              {/* Availability Status */}
+              <motion.div
+                variants={itemVariants}
+                className="mt-10"
+              >
+                <div className="inline-flex items-center px-4 py-2 bg-secondary-400/20 text-secondary-400 rounded-xl text-lg">
+                  <div className="w-3 h-3 bg-secondary-400 rounded-full mr-3 animate-pulse"></div>
+                  Available for new projects
+                </div>
+                <p className="text-gray-400 mt-3">
+                  Currently based in Chennai, India • Remote collaboration available worldwide
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
 
-          <div className="flex justify-center">
-            {/* Contact Information - Centered */}
-            <motion.div variants={itemVariants} className="max-w-2xl w-full">
-              <div className="glass rounded-2xl p-8 shadow-neon backdrop-blur-md">
-                <h2 className="text-2xl font-bold gradient-text mb-6 text-center">
-                  Contact Information
-                </h2>
-                <p className="text-gray-300 mb-8 text-center">
-                  Ready to start your next project or have a question? Feel free to reach out through any of the channels below. I'll get back to you as soon as possible!
+          {/* Right Column - Additional Information */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <div className="glass rounded-2xl p-8 shadow-neon-purple">
+              <h2 className="text-2xl font-bold text-accent-400 mb-8">
+                Let's Connect
+              </h2>
+              
+              <div className="space-y-6">
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
                 </p>
                 
-                <div className="space-y-6">
-                  {contactItems.map((item, index) => (
-                    <motion.a
-                      key={index}
-                      href={item.href}
-                      target={item.href.startsWith('http') ? '_blank' : '_self'}
-                      rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
-                      whileHover={{ x: 10, scale: 1.02 }}
-                      className="flex items-center p-4 glass rounded-lg hover:shadow-neon transition-all duration-300 group"
-                    >
-                      <div className={`p-3 rounded-lg ${item.color} bg-white/10 mr-4`}>
-                        <item.icon className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <p className={`font-medium ${item.color}`}>{item.label}</p>
-                        <p className="text-gray-300 group-hover:text-white transition-colors duration-300">
-                          {item.value}
-                        </p>
-                      </div>
-                    </motion.a>
-                  ))}
+                <div className="bg-gradient-to-r from-accent-500/20 to-primary-500/20 rounded-xl p-6 border border-accent-500/30">
+                  <h3 className="text-xl font-bold text-white mb-3">Response Time</h3>
+                  <p className="text-gray-300 mb-4">
+                    I typically respond to emails and messages within 24 hours during business days.
+                  </p>
+                  <div className="flex items-center text-accent-400">
+                    <div className="w-3 h-3 bg-accent-400 rounded-full mr-3 animate-pulse"></div>
+                    <span>Usually responds within a few hours</span>
+                  </div>
                 </div>
                 
-                {/* Availability Status */}
-                <div className="mt-8 text-center">
-                  <div className="inline-flex items-center px-4 py-2 bg-secondary-400/20 text-secondary-400 rounded-lg">
-                    <div className="w-2 h-2 bg-secondary-400 rounded-full mr-2 animate-pulse"></div>
-                    Available for new projects
-                  </div>
-                  <p className="text-gray-400 text-sm mt-2">
-                    Currently based in Chennai, India (UTC+05:30) • Remote collaboration worldwide
+                <div className="bg-gradient-to-r from-secondary-500/20 to-pink-500/20 rounded-xl p-6 border border-secondary-500/30">
+                  <h3 className="text-xl font-bold text-white mb-3">Preferred Contact</h3>
+                  <p className="text-gray-300">
+                    For quick responses, I recommend reaching out via email or LinkedIn. For project discussions, 
+                    a quick call can be arranged after initial contact.
                   </p>
                 </div>
               </div>
-            </motion.div>
-          </div>
-
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
