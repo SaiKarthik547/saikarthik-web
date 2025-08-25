@@ -7,7 +7,7 @@ import { getDeviceInfo, shouldReduceMotion, getOptimizationLevel } from '../util
 
 const Projects: React.FC = () => {
   const { portfolio } = portfolioData;
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, ] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [optimizationLevel, setOptimizationLevel] = useState<'very-low' | 'low' | 'medium' | 'high'>('high');
 
@@ -15,7 +15,7 @@ const Projects: React.FC = () => {
     const deviceInfo = getDeviceInfo();
     const optLevel = getOptimizationLevel();
     
-    setIsMobile(deviceInfo.isMobile);
+    // setIsMobile(deviceInfo.isMobile);
     setReduceMotion(shouldReduceMotion());
     setOptimizationLevel(optLevel);
   }, []);

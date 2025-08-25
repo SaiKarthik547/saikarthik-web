@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin } from 'lucide-react';
+import { Calendar, MapPin, Award } from 'lucide-react';
 import SplineBackground from '../components/SplineBackground';
 import { portfolioData, splineBackgrounds } from '../data/portfolioData';
 import { getDeviceInfo, shouldReduceMotion, getOptimizationLevel } from '../utils/deviceDetection';
 
 const About: React.FC = () => {
-  const { personal, education } = portfolioData;
-  const [isMobile, setIsMobile] = useState(false);
+  const { about } = portfolioData;
+  const [isMobile, ] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [optimizationLevel, setOptimizationLevel] = useState<'very-low' | 'low' | 'medium' | 'high'>('high');
 
@@ -15,7 +15,7 @@ const About: React.FC = () => {
     const deviceInfo = getDeviceInfo();
     const optLevel = getOptimizationLevel();
     
-    setIsMobile(deviceInfo.isMobile);
+    // setIsMobile(deviceInfo.isMobile);
     setReduceMotion(shouldReduceMotion());
     setOptimizationLevel(optLevel);
   }, []);
@@ -122,19 +122,19 @@ const About: React.FC = () => {
             <div>
               <div className="glass rounded-lg p-3 shadow-neon-purple">
                 <h2 className="text-base font-bold text-accent-400 mb-3 flex items-center">
-                  <GraduationCap className="w-4 h-4 mr-2" />
+                  <Award className="w-4 h-4 mr-2" />
                   Education
                 </h2>
                 
                 <div className="space-y-3">
-                  {education.map((edu, index) => (
+                  {about.education.map((edu, index) => (
                     <div
                       key={index}
                       className={`border-l-2 pl-2 pb-3 ${
                         edu.status === 'current' 
                           ? 'border-accent-400' 
                           : 'border-gray-600'
-                      } ${index !== education.length - 1 ? 'border-b border-gray-700' : ''}`}
+                      } ${index !== about.education.length - 1 ? 'border-b border-gray-700' : ''}`}
                     >
                       <div className="flex items-center justify-between mb-1">
                         <h3 className="text-xs font-semibold text-white">
@@ -173,7 +173,7 @@ const About: React.FC = () => {
                 I'm always excited to discuss new opportunities and creative projects.
               </p>
               <a
-                href={`mailto:${personal.contact.email}`}
+                href={`mailto:${about.contact.email}`}
                 className="inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-md font-medium text-white hover:shadow-neon transition-all duration-300 text-xs"
               >
                 Get In Touch
@@ -266,19 +266,19 @@ const About: React.FC = () => {
             <div>
               <div className="glass rounded-xl p-4 shadow-neon-purple">
                 <h2 className="text-lg font-bold text-accent-400 mb-4 flex items-center">
-                  <GraduationCap className="w-4 h-4 mr-2" />
+                  <Award className="w-4 h-4 mr-2" />
                   Education
                 </h2>
                 
                 <div className="space-y-4">
-                  {education.map((edu, index) => (
+                  {about.education.map((edu, index) => (
                     <div
                       key={index}
                       className={`border-l-2 pl-3 pb-4 ${
                         edu.status === 'current' 
                           ? 'border-accent-400' 
                           : 'border-gray-600'
-                      } ${index !== education.length - 1 ? 'border-b border-gray-700' : ''}`}
+                      } ${index !== about.education.length - 1 ? 'border-b border-gray-700' : ''}`}
                     >
                       <div className="flex items-center justify-between mb-1">
                         <h3 className="text-sm font-semibold text-white">
@@ -317,7 +317,7 @@ const About: React.FC = () => {
                 I'm always excited to discuss new opportunities and creative projects.
               </p>
               <a
-                href={`mailto:${personal.contact.email}`}
+                href={`mailto:${about.contact.email}`}
                 className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg font-medium text-white hover:shadow-neon transition-all duration-300 text-sm"
               >
                 Get In Touch
@@ -439,7 +439,7 @@ const About: React.FC = () => {
                 variants={itemVariants}
                 className="text-2xl font-bold text-accent-400 mb-8 flex items-center"
               >
-                <GraduationCap className="w-6 h-6 mr-3" />
+                <Award className="w-6 h-6 mr-3" />
                 Education
               </motion.h2>
               
@@ -447,14 +447,14 @@ const About: React.FC = () => {
                 variants={itemVariants}
                 className="space-y-8"
               >
-                {education.map((edu, index) => (
+                {about.education.map((edu, index) => (
                   <div
                     key={index}
                     className={`border-l-4 pl-6 pb-8 ${
                       edu.status === 'current' 
                         ? 'border-accent-400' 
                         : 'border-gray-600'
-                    } ${index !== education.length - 1 ? 'border-b border-gray-700' : ''}`}
+                    } ${index !== about.education.length - 1 ? 'border-b border-gray-700' : ''}`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-xl font-semibold text-white">
@@ -499,7 +499,7 @@ const About: React.FC = () => {
               </motion.p>
               <motion.a
                 variants={itemVariants}
-                href={`mailto:${personal.contact.email}`}
+                href={`mailto:${about.contact.email}`}
                 className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl font-bold text-white hover:shadow-neon transition-all duration-300 text-lg hover:scale-105"
               >
                 Get In Touch

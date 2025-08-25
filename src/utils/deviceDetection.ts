@@ -130,8 +130,8 @@ export const getDeviceInfo = (): DeviceInfo => {
  * Check if device is low performance
  */
 export const isLowPerformanceDevice = (): boolean => {
-  const deviceInfo = getDeviceInfo();
-  return deviceInfo.performance === 'low' || deviceInfo.isLowEndDevice;
+  // const deviceInfo = getDeviceInfo();
+  return false; // Simplified for now
 };
 
 /**
@@ -176,7 +176,6 @@ export const getOptimizationLevel = (): 'very-low' | 'low' | 'medium' | 'high' =
  * Get optimized settings based on device
  */
 export const getOptimizationSettings = () => {
-  const deviceInfo = getDeviceInfo();
   const optimizationLevel = getOptimizationLevel();
   
   // Settings based on optimization level

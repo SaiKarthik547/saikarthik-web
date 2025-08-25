@@ -50,56 +50,56 @@ const App: React.FC = () => {
           initial: { opacity: 0, x: -100, rotateY: -15 },
           animate: { opacity: 1, x: 0, rotateY: 0 },
           exit: { opacity: 0, x: 100, rotateY: 15 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       case 'about':
         return {
           initial: { opacity: 0, y: -100, scale: 0.9 },
           animate: { opacity: 1, y: 0, scale: 1 },
           exit: { opacity: 0, y: 100, scale: 0.9 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       case 'experience':
         return {
           initial: { opacity: 0, x: 100, rotateY: 15 },
           animate: { opacity: 1, x: 0, rotateY: 0 },
           exit: { opacity: 0, x: -100, rotateY: -15 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       case 'skills':
         return {
           initial: { opacity: 0, y: 100, scale: 0.8 },
           animate: { opacity: 1, y: 0, scale: 1 },
           exit: { opacity: 0, y: -100, scale: 0.8 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       case 'services':
         return {
           initial: { opacity: 0, x: -100, y: -50 },
           animate: { opacity: 1, x: 0, y: 0 },
           exit: { opacity: 0, x: 100, y: 50 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       case 'projects':
         return {
           initial: { opacity: 0, scale: 0.7, rotateX: -30 },
           animate: { opacity: 1, scale: 1, rotateX: 0 },
           exit: { opacity: 0, scale: 0.7, rotateX: 30 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       case 'contact':
         return {
           initial: { opacity: 0, x: 100, y: 100 },
           animate: { opacity: 1, x: 0, y: 0 },
           exit: { opacity: 0, x: -100, y: -100 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
       default:
         return {
           initial: { opacity: 0 },
           animate: { opacity: 1 },
           exit: { opacity: 0 },
-          transition: { duration: 0.6, ease: "easeInOut" }
+          transition: { duration: 0.6, ease: "easeInOut" as const }
         };
     }
   };

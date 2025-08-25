@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Award, Code, Database, Gamepad2, TrendingUp, Users } from 'lucide-react';
+import { Calendar, MapPin, Award } from 'lucide-react';
 import SplineBackground from '../components/SplineBackground';
 import { portfolioData, splineBackgrounds } from '../data/portfolioData';
 import { getDeviceInfo, shouldReduceMotion, getOptimizationLevel } from '../utils/deviceDetection';
 
 const Experience: React.FC = () => {
   const { experience } = portfolioData;
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, ] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [optimizationLevel, setOptimizationLevel] = useState<'very-low' | 'low' | 'medium' | 'high'>('high');
 
@@ -15,7 +15,7 @@ const Experience: React.FC = () => {
     const deviceInfo = getDeviceInfo();
     const optLevel = getOptimizationLevel();
     
-    setIsMobile(deviceInfo.isMobile);
+    // setIsMobile(deviceInfo.isMobile);
     setReduceMotion(shouldReduceMotion());
     setOptimizationLevel(optLevel);
   }, []);

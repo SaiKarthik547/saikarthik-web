@@ -67,7 +67,7 @@ const SplineBackground: React.FC<SplineBackgroundProps> = ({
 
   // Determine if we should show the 3D background based on device and performance
   const shouldShow3D = mobileOptimized ? 
-    (isMobile ? optimizationLevel !== 'low' : true) : 
+    (isMobile ? optimizationLevel !== 'low' && optimizationLevel !== 'very-low' : true) : 
     true;
 
   return (

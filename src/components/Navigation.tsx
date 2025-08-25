@@ -108,7 +108,7 @@ const Navigation: React.FC = () => {
             {/* Menu */}
             <div className="absolute right-0 top-0 h-full w-48 bg-dark-100/90 border-l border-white/10">
               <div className="flex flex-col pt-16 px-4">
-                {navItems.map((item, index) => (
+                {navItems.map((item) => (
                   <div key={item.path}>
                     <Link
                       to={item.path}
@@ -193,7 +193,7 @@ const Navigation: React.FC = () => {
             {/* Menu */}
             <div className="absolute right-0 top-0 h-full w-64 bg-dark-100/95 backdrop-blur-md border-l border-white/10">
               <div className="flex flex-col pt-20 px-6">
-                {navItems.map((item, index) => (
+                {navItems.map((item) => (
                   <div key={item.path}>
                     <Link
                       to={item.path}
