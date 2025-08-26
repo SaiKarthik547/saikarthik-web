@@ -46,7 +46,7 @@ Check out the live version at [your-domain.com]
 - **Experience** - Current certifications and projects
 - **Skills** - Technical abilities with progress bars
 - **Services** - What I can help you with
-- **Portfolio** - Featured projects and work
+- **Projects** - Featured projects and work
 - **Contact** - Get in touch for collaborations
 
 ---
