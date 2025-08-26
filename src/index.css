@@ -37,9 +37,19 @@ body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0a0a0a 100%);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  /* Reduced animation duration for mobile devices */
+  animation: gradientShift 30s ease infinite;
   color: #ffffff;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduced animation speed for mobile devices */
+@media (max-width: 768px) {
+  body {
+    animation-duration: 60s;
+  }
 }
 
 @keyframes gradientShift {
@@ -65,10 +75,28 @@ body {
 /* Glass morphism effect */
 .glass {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Optimized glass effect for mobile and low-end devices */
+.glass-optimized, 
+.low-end-optimized .glass,
+.very-low-end-optimized .glass {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 16px 0 rgba(31, 38, 135, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Disable backdrop blur on very low-end devices */
+.very-low-end-optimized .glass,
+.no-backdrop-blur .glass {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 /* Custom animations */
@@ -98,4 +126,226 @@ body {
 
 .shadow-neon-purple {
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+/* Reduced shadows for mobile and low-end devices */
+.low-end-optimized .shadow-neon,
+.very-low-end-optimized .shadow-neon {
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.low-end-optimized .shadow-neon-green,
+.very-low-end-optimized .shadow-neon-green {
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+}
+
+.low-end-optimized .shadow-neon-purple,
+.very-low-end-optimized .shadow-neon-purple {
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+/* Very low-end device optimizations */
+.very-low-end-optimized {
+  /* Disable all transitions and animations */
+  transition: none !important;
+}
+
+.very-low-end-optimized * {
+  transition: none !important;
+  animation: none !important;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce padding and margins on mobile */
+  .mobile-optimized .p-8,
+  .low-end-optimized .p-8,
+  .very-low-end-optimized .p-8 {
+    padding: 1rem;
+  }
+  
+  .mobile-optimized .p-6,
+  .low-end-optimized .p-6,
+  .very-low-end-optimized .p-6 {
+    padding: 0.75rem;
+  }
+  
+  .mobile-optimized .p-4,
+  .low-end-optimized .p-4,
+  .very-low-end-optimized .p-4 {
+    padding: 0.5rem;
+  }
+  
+  .mobile-optimized .m-8,
+  .low-end-optimized .m-8,
+  .very-low-end-optimized .m-8 {
+    margin: 1rem;
+  }
+  
+  .mobile-optimized .m-6,
+  .low-end-optimized .m-6,
+  .very-low-end-optimized .m-6 {
+    margin: 0.75rem;
+  }
+  
+  .mobile-optimized .m-4,
+  .low-end-optimized .m-4,
+  .very-low-end-optimized .m-4 {
+    margin: 0.5rem;
+  }
+  
+  /* Reduce font sizes on mobile */
+  .mobile-optimized .text-4xl,
+  .low-end-optimized .text-4xl,
+  .very-low-end-optimized .text-4xl {
+    font-size: 2rem;
+  }
+  
+  .mobile-optimized .text-3xl,
+  .low-end-optimized .text-3xl,
+  .very-low-end-optimized .text-3xl {
+    font-size: 1.75rem;
+  }
+  
+  .mobile-optimized .text-2xl,
+  .low-end-optimized .text-2xl,
+  .very-low-end-optimized .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .mobile-optimized .text-xl,
+  .low-end-optimized .text-xl,
+  .very-low-end-optimized .text-xl {
+    font-size: 1.25rem;
+  }
+  
+  /* Simplify layouts on mobile */
+  .mobile-optimized .grid-cols-2,
+  .low-end-optimized .grid-cols-2,
+  .very-low-end-optimized .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobile-optimized .grid-cols-3,
+  .low-end-optimized .grid-cols-3,
+  .very-low-end-optimized .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  
+  .mobile-optimized .grid-cols-4,
+  .low-end-optimized .grid-cols-4,
+  .very-low-end-optimized .grid-cols-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  /* Reduce element sizes on mobile */
+  .mobile-optimized .w-32,
+  .low-end-optimized .w-32,
+  .very-low-end-optimized .w-32 {
+    width: 5rem;
+  }
+  
+  .mobile-optimized .h-32,
+  .low-end-optimized .h-32,
+  .very-low-end-optimized .h-32 {
+    height: 5rem;
+  }
+  
+  .mobile-optimized .w-24,
+  .low-end-optimized .w-24,
+  .very-low-end-optimized .w-24 {
+    width: 4rem;
+  }
+  
+  .mobile-optimized .h-24,
+  .low-end-optimized .h-24,
+  .very-low-end-optimized .h-24 {
+    height: 4rem;
+  }
+  
+  /* Simplify navigation on mobile */
+  .mobile-optimized .nav-link,
+  .low-end-optimized .nav-link,
+  .very-low-end-optimized .nav-link {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Reduce border radius on mobile for better performance */
+  .mobile-optimized .rounded-xl,
+  .low-end-optimized .rounded-xl,
+  .very-low-end-optimized .rounded-xl {
+    border-radius: 0.5rem;
+  }
+  
+  .mobile-optimized .rounded-2xl,
+  .low-end-optimized .rounded-2xl,
+  .very-low-end-optimized .rounded-2xl {
+    border-radius: 0.75rem;
+  }
+}
+
+/* Very low-end device specific optimizations */
+@media (max-width: 480px) {
+  /* Further reduce effects on very small screens */
+  .very-low-end-optimized {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+  
+  /* Disable complex visual effects */
+  .very-low-end-optimized .complex-effect,
+  .very-low-end-optimized .glass-effect {
+    display: none;
+  }
+  
+  /* Simplify all elements */
+  .very-low-end-optimized * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+  
+  /* Reduce font sizes even more */
+  .very-low-end-optimized .text-4xl {
+    font-size: 1.5rem;
+  }
+  
+  .very-low-end-optimized .text-3xl {
+    font-size: 1.25rem;
+  }
+  
+  .very-low-end-optimized .text-2xl {
+    font-size: 1.125rem;
+  }
+  
+  .very-low-end-optimized .text-xl {
+    font-size: 1rem;
+  }
+  
+  /* Simplify all grids to single column */
+  .very-low-end-optimized .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Ensure proper mobile viewport handling */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+  min-zoom: 0.5;
+  max-zoom: 2.0;
+  user-zoom: fixed;
 }
