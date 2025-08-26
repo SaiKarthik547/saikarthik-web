@@ -1,24 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, Linkedin, Github } from 'lucide-react';
 import SplineBackground from '../components/SplineBackground';
 import { portfolioData, splineBackgrounds } from '../data/portfolioData';
-import { getDeviceInfo, shouldReduceMotion, getOptimizationLevel } from '../utils/deviceDetection';
 
 const Contact: React.FC = () => {
   const { personal } = portfolioData;
-  const [isMobile, ] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [optimizationLevel, setOptimizationLevel] = useState<'very-low' | 'low' | 'medium' | 'high'>('high');
-
-  useEffect(() => {
-    const deviceInfo = getDeviceInfo();
-    const optLevel = getOptimizationLevel();
-    
-    // setIsMobile(deviceInfo.isMobile);
-    setReduceMotion(shouldReduceMotion());
-    setOptimizationLevel(optLevel);
-  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -72,152 +59,12 @@ const Contact: React.FC = () => {
     }
   ];
 
-  // For very low-end devices, show a simplified version
-  if (optimizationLevel === 'very-low') {
-    return (
-      <div className="min-h-screen pt-14 pb-8 relative">
-        {/* Spline 3D Background */}
-        <SplineBackground 
-          src={splineBackgrounds.contact} 
-          className="opacity-90"
-          mobileOptimized={true}
-        />
-        
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <h1 className="text-xl font-bold gradient-text mb-2">
-              Get In Touch
-            </h1>
-            <p className="text-sm text-gray-300">
-              Let's collaborate and bring your ideas to life
-            </p>
-          </div>
-
-          {/* Contact Information */}
-          <div className="glass rounded-lg p-3 shadow-neon">
-            <h2 className="text-base font-bold gradient-text mb-3 text-center">
-              Contact Information
-            </h2>
-            <p className="text-gray-300 mb-4 text-center text-xs">
-              Ready to start your next project? Feel free to reach out!
-            </p>
-            
-            <div className="space-y-3">
-              {contactItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  target={item.href.startsWith('http') ? '_blank' : '_self'}
-                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="flex items-center p-2 glass rounded-lg hover:shadow-neon transition-all duration-300"
-                >
-                  <div className={`p-1.5 rounded ${item.color} bg-white/10 mr-2`}>
-                    <item.icon className="w-3 h-3" />
-                  </div>
-                  <div>
-                    <p className={`font-medium ${item.color} text-xs`}>{item.label}</p>
-                    <p className="text-gray-300 text-xs">
-                      {item.value}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-            
-            {/* Availability Status */}
-            <div className="mt-4 text-center">
-              <div className="inline-flex items-center px-2 py-1 bg-secondary-400/20 text-secondary-400 rounded-lg text-xs">
-                <div className="w-1.5 h-1.5 bg-secondary-400 rounded-full mr-1 animate-pulse"></div>
-                Available for new projects
-              </div>
-              <p className="text-gray-400 text-xs mt-1">
-                Currently based in Chennai, India • Remote collaboration
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // For low-end devices, show a simplified version
-  if (reduceMotion || optimizationLevel === 'low') {
-    return (
-      <div className="min-h-screen pt-16 pb-12 relative">
-        {/* Spline 3D Background */}
-        <SplineBackground 
-          src={splineBackgrounds.contact} 
-          className="opacity-80"
-          mobileOptimized={true}
-        />
-        
-        <div className="relative z-10 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold gradient-text mb-3">
-              Get In Touch
-            </h1>
-            <p className="text-base text-gray-300">
-              Let's collaborate and bring your ideas to life
-            </p>
-          </div>
-
-          {/* Contact Information */}
-          <div className="glass rounded-xl p-4 shadow-neon">
-            <h2 className="text-lg font-bold gradient-text mb-4 text-center">
-              Contact Information
-            </h2>
-            <p className="text-gray-300 mb-5 text-center text-sm">
-              Ready to start your next project? Feel free to reach out!
-            </p>
-            
-            <div className="space-y-4">
-              {contactItems.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  target={item.href.startsWith('http') ? '_blank' : '_self'}
-                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="flex items-center p-3 glass rounded-lg hover:shadow-neon transition-all duration-300"
-                >
-                  <div className={`p-2 rounded ${item.color} bg-white/10 mr-3`}>
-                    <item.icon className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <p className={`font-medium ${item.color} text-sm`}>{item.label}</p>
-                    <p className="text-gray-300 text-xs">
-                      {item.value}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
-            
-            {/* Availability Status */}
-            <div className="mt-6 text-center">
-              <div className="inline-flex items-center px-3 py-1.5 bg-secondary-400/20 text-secondary-400 rounded-lg text-sm">
-                <div className="w-2 h-2 bg-secondary-400 rounded-full mr-2 animate-pulse"></div>
-                Available for new projects
-              </div>
-              <p className="text-gray-400 text-xs mt-2">
-                Currently based in Chennai, India • Remote collaboration
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Full animation version for desktop/high-performance devices
   return (
     <div className="min-h-screen pt-20 pb-16 relative">
       {/* Spline 3D Background */}
       <SplineBackground 
         src={splineBackgrounds.contact} 
         className="opacity-70"
-        mobileOptimized={true}
       />
       
       <div className="relative z-20 max-w-4xl mx-auto px-6">

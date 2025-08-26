@@ -1,23 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { Code, Terminal, Palette } from 'lucide-react';
 import SplineBackground from '../components/SplineBackground';
 import { portfolioData, splineBackgrounds } from '../data/portfolioData';
-import { getDeviceInfo, shouldReduceMotion, getOptimizationLevel } from '../utils/deviceDetection';
 
 const Skills: React.FC = () => {
-  const { skills } = portfolioData;
-  const [isMobile, ] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [optimizationLevel, setOptimizationLevel] = useState<'very-low' | 'low' | 'medium' | 'high'>('high');
-
-  useEffect(() => {
-    const deviceInfo = getDeviceInfo();
-    const optLevel = getOptimizationLevel();
-    
-    // setIsMobile(deviceInfo.isMobile);
-    setReduceMotion(shouldReduceMotion());
-    setOptimizationLevel(optLevel);
-  }, []);
+  const { skills, competencies } = portfolioData;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -41,295 +29,28 @@ const Skills: React.FC = () => {
   };
 
   const SkillBar: React.FC<{ skill: { name: string; level: number }; color: string }> = ({ skill, color }) => (
-    <div className="mb-3">
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-white font-medium text-xs">{skill.name}</span>
-        <span className="text-gray-400 text-xs">{skill.level}%</span>
+    <div className="mb-6">
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-white font-medium">{skill.name}</span>
+        <span className="text-gray-400">{skill.level}%</span>
       </div>
-      <div className="w-full bg-gray-700 rounded-full h-1.5">
+      <div className="w-full bg-gray-700 rounded-full h-3">
         <motion.div
-          className={`h-1.5 rounded-full bg-gradient-to-r ${color}`}
+          className={`h-3 rounded-full bg-gradient-to-r ${color}`}
           initial={{ width: 0 }}
-          animate={animateSkills ? { width: `${skill.level}%` } : { width: 0 }}
+          animate={{ width: `${skill.level}%` }}
           transition={{ duration: 1.5, delay: 0.5 }}
         />
       </div>
     </div>
   );
 
-  const SkillBarLowEnd: React.FC<{ skill: { name: string; level: number }; color: string }> = ({ skill, color }) => (
-    <div className="mb-2">
-      <div className="flex justify-between items-center mb-1">
-        <span className="text-white font-medium text-xs">{skill.name}</span>
-        <span className="text-gray-400 text-xs">{skill.level}%</span>
-      </div>
-      <div className="w-full bg-gray-700 rounded-full h-1">
-        <div
-          className={`h-1 rounded-full bg-gradient-to-r ${color}`}
-          style={{ width: `${skill.level}%` }}
-        />
-      </div>
-    </div>
-  );
-
-  // For very low-end devices, show a simplified version
-  if (optimizationLevel === 'very-low') {
-    return (
-      <div className="min-h-screen pt-14 pb-8 relative">
-        {/* Spline 3D Background */}
-        <SplineBackground 
-          src={splineBackgrounds.skills} 
-          className="opacity-90"
-          mobileOptimized={true}
-        />
-        
-        <div className="relative z-20 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <h1 className="text-xl font-bold gradient-text mb-2">
-              Skills & Expertise
-            </h1>
-            <p className="text-sm text-gray-300">
-              Continuously expanding my technical toolkit
-            </p>
-          </div>
-
-          {/* Skills Grid */}
-          <div className="space-y-4">
-            
-            {/* Frontend Development */}
-            <div className="glass rounded-lg p-3 shadow-neon">
-              <div className="flex items-center mb-2">
-                <div className="p-1.5 bg-primary-400/30 rounded mr-2">
-                  <Code className="w-3 h-3 text-primary-400" />
-                </div>
-                <h2 className="text-sm font-bold text-primary-400">
-                  Frontend Development
-                </h2>
-              </div>
-              
-              <div className="space-y-2">
-                {skills.frontend.map((skill, index) => (
-                  <SkillBarLowEnd
-                    key={index}
-                    skill={skill}
-                    color="from-primary-400 to-primary-600"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Programming Languages */}
-            <div className="glass rounded-lg p-3 shadow-neon-green">
-              <div className="flex items-center mb-2">
-                <div className="p-1.5 bg-secondary-400/30 rounded mr-2">
-                  <Terminal className="w-3 h-3 text-secondary-400" />
-                </div>
-                <h2 className="text-sm font-bold text-secondary-400">
-                  Programming Languages
-                </h2>
-              </div>
-              
-              <div className="space-y-2">
-                {skills.programming.map((skill, index) => (
-                  <SkillBarLowEnd
-                    key={index}
-                    skill={skill}
-                    color="from-secondary-400 to-secondary-600"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Design & Tools */}
-            <div className="glass rounded-lg p-3 shadow-neon-purple">
-              <div className="flex items-center mb-2">
-                <div className="p-1.5 bg-accent-400/30 rounded mr-2">
-                  <Palette className="w-3 h-3 text-accent-400" />
-                </div>
-                <h2 className="text-sm font-bold text-accent-400">
-                  Design & Tools
-                </h2>
-              </div>
-              
-              <div className="space-y-2">
-                {skills.design.map((skill, index) => (
-                  <SkillBarLowEnd
-                    key={index}
-                    skill={skill}
-                    color="from-accent-400 to-accent-600"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Core Competencies */}
-          <div className="glass rounded-lg p-3 shadow-neon text-center mt-4">
-            <h2 className="text-base font-bold gradient-text mb-3">
-              Core Competencies
-            </h2>
-            
-            <div className="flex flex-wrap justify-center gap-1.5">
-              {competencies.map((competency, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-white/20 rounded-full text-white font-medium text-xs"
-                >
-                  {competency}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Learning Philosophy */}
-          <div className="glass rounded-lg p-3 shadow-neon text-center mt-4">
-            <h3 className="text-sm font-bold gradient-text mb-1.5">
-              Learning Philosophy
-            </h3>
-            <p className="text-gray-300 text-xs leading-relaxed">
-              I believe in continuous learning and staying updated with the latest technologies. 
-              Every project is an opportunity to learn something new and improve existing skills.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // For low-end devices, show a simplified version
-  if (reduceMotion || optimizationLevel === 'low') {
-    return (
-      <div className="min-h-screen pt-16 pb-12 relative">
-        {/* Spline 3D Background */}
-        <SplineBackground 
-          src={splineBackgrounds.skills} 
-          className="opacity-90"
-          mobileOptimized={true}
-        />
-        
-        <div className="relative z-20 max-w-6xl mx-auto px-4">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold gradient-text mb-3">
-              Skills & Expertise
-            </h1>
-            <p className="text-base text-gray-300">
-              Continuously expanding my technical toolkit
-            </p>
-          </div>
-
-          {/* Skills Grid */}
-          <div className="space-y-6">
-            
-            {/* Frontend Development */}
-            <div className="glass rounded-xl p-4 shadow-neon">
-              <div className="flex items-center mb-3">
-                <div className="p-2 bg-primary-400/30 rounded mr-2">
-                  <Code className="w-4 h-4 text-primary-400" />
-                </div>
-                <h2 className="text-base font-bold text-primary-400">
-                  Frontend Development
-                </h2>
-              </div>
-              
-              <div className="space-y-3">
-                {skills.frontend.map((skill, index) => (
-                  <SkillBarLowEnd
-                    key={index}
-                    skill={skill}
-                    color="from-primary-400 to-primary-600"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Programming Languages */}
-            <div className="glass rounded-xl p-4 shadow-neon-green">
-              <div className="flex items-center mb-3">
-                <div className="p-2 bg-secondary-400/30 rounded mr-2">
-                  <Terminal className="w-4 h-4 text-secondary-400" />
-                </div>
-                <h2 className="text-base font-bold text-secondary-400">
-                  Programming Languages
-                </h2>
-              </div>
-              
-              <div className="space-y-3">
-                {skills.programming.map((skill, index) => (
-                  <SkillBarLowEnd
-                    key={index}
-                    skill={skill}
-                    color="from-secondary-400 to-secondary-600"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Design & Tools */}
-            <div className="glass rounded-xl p-4 shadow-neon-purple">
-              <div className="flex items-center mb-3">
-                <div className="p-2 bg-accent-400/30 rounded mr-2">
-                  <Palette className="w-4 h-4 text-accent-400" />
-                </div>
-                <h2 className="text-base font-bold text-accent-400">
-                  Design & Tools
-                </h2>
-              </div>
-              
-              <div className="space-y-3">
-                {skills.design.map((skill, index) => (
-                  <SkillBarLowEnd
-                    key={index}
-                    skill={skill}
-                    color="from-accent-400 to-accent-600"
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Core Competencies */}
-          <div className="glass rounded-xl p-4 shadow-neon text-center mt-6">
-            <h2 className="text-lg font-bold gradient-text mb-4">
-              Core Competencies
-            </h2>
-            
-            <div className="flex flex-wrap justify-center gap-2">
-              {competencies.map((competency, index) => (
-                <span
-                  key={index}
-                  className="px-3 py-1 bg-gradient-to-r from-primary-500/20 to-accent-500/20 border border-white/20 rounded-full text-white font-medium text-xs"
-                >
-                  {competency}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Learning Philosophy */}
-          <div className="glass rounded-xl p-4 shadow-neon text-center mt-6">
-            <h3 className="text-base font-bold gradient-text mb-2">
-              Learning Philosophy
-            </h3>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              I believe in continuous learning and staying updated with the latest technologies. 
-              Every project is an opportunity to learn something new and improve existing skills.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Full animation version for desktop/high-performance devices
   return (
     <div className="min-h-screen pt-20 pb-16 relative">
       {/* Spline 3D Background */}
       <SplineBackground 
         src={splineBackgrounds.skills} 
         className="opacity-80"
-        mobileOptimized={true}
       />
       
       <div className="relative z-20 max-w-6xl mx-auto px-6">
