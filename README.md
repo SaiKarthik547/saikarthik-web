@@ -37,7 +37,7 @@ npm run build
 
 ## Live Demo
 
-Check out the live version at [your-domain.com]
+Check out the live version at [https://sai-portfolio-theta.vercel.app/]
 
 ## Features
 
