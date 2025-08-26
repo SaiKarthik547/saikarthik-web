@@ -7,7 +7,7 @@ import About from './pages/About';
 import Experience from './pages/Experience';
 import Skills from './pages/Skills';
 import Services from './pages/Services';
-import Portfolio from './pages/Portfolio';
+import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import './App.css';
 
@@ -69,14 +69,14 @@ const App: React.FC = () => {
                 <Services />
               </motion.div>
             } />
-            <Route path="/portfolio" element={
+            <Route path="/projects" element={
               <motion.div
                 initial={{ opacity: 0, scale: 0.7, rotateX: -30 }}
                 animate={{ opacity: 1, scale: 1, rotateX: 0 }}
                 exit={{ opacity: 0, scale: 0.7, rotateX: 30 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
               >
-                <Portfolio />
+                <Projects />
               </motion.div>
             } />
             <Route path="/contact" element={

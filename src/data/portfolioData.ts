@@ -167,18 +167,21 @@ export const portfolioData = {
       image: "https://ik.imagekit.io/e08wbj78c/leo%20ai.png?updatedAt=1753704439802",
       technologies: ["React", "TypeScript", "Tailwind CSS", "API Integration"],
       liveUrl: "https://leo-ai-assist.vercel.app/",
+      githubUrl: "https://github.com/SaiKarthik547/leo-ai-assistant",
       status: "live"
     },
     {
       title: "Featured Project 2",
       description: "Another incredible project waiting to be added to showcase your development skills and creativity.",
       technologies: ["Python", "Django", "PostgreSQL"],
+      githubUrl: "https://github.com/SaiKarthik547",
       status: "coming-soon"
     },
     {
       title: "Featured Project 3",
       description: "A third project slot ready for your next innovative creation that will demonstrate your expertise.",
       technologies: ["Java", "Spring Boot", "MySQL"],
+      githubUrl: "https://github.com/SaiKarthik547",
       status: "coming-soon"
     }
   ]
@@ -186,11 +189,11 @@ export const portfolioData = {
 
 // Spline 3D backgrounds for each page
 export const splineBackgrounds = {
-  home: "https://my.spline.design/orb-MlbAdhcJ4tBFqGCrGhxwxkpM/",
-  about: "https://my.spline.design/radialglass-MZ02f4FMBrgRot2cLLix2czo/",
-  experience: "https://my.spline.design/glowingplanetparticles-3JjcpCL34zDRHVOJ3Sujakz0/",
+  home: "https://my.spline.design/orb-pOl7R7Zht8jZsqEg8KXFLKH8/",
+  about: "https://my.spline.design/chips-r8NovCg4a3hz14ztdCRJNJQw/",
+  experience: "https://my.spline.design/galaxy-wY8iiCfrLEJG3MeLo1zJPNLw/",
   skills: "https://my.spline.design/claritystream-qjV0FJtxmNUmDvDLs5BCnuPW/",
-  services: "https://my.spline.design/holographicearthwithdynamiclines-EoBDavTCHyUR13d5zF2VJahy/",
+  services: "https://my.spline.design/particlenebula-955YI6OdJAaPz7Bb30TF60am/",
   portfolio: "https://my.spline.design/customlinepathwithcustommatcap-X6VPZfKQNGpP25x69wylbfNI/",
   contact: "https://my.spline.design/galaxy-AB0ig2ZqPyHHUtBuHV8YtNLK/"
 };

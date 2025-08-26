@@ -4,7 +4,7 @@ import { ExternalLink, Github, Clock, CheckCircle } from 'lucide-react';
 import SplineBackground from '../components/SplineBackground';
 import { portfolioData, splineBackgrounds } from '../data/portfolioData';
 
-const Portfolio: React.FC = () => {
+const Projects: React.FC = () => {
   const { portfolio } = portfolioData;
 
   const containerVariants = {
@@ -79,7 +79,7 @@ const Portfolio: React.FC = () => {
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold gradient-text mb-6">
-              Portfolio
+              Projects
             </h1>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Showcasing creative solutions and innovative projects that demonstrate technical expertise
@@ -230,4 +230,4 @@ const Portfolio: React.FC = () => {
   );
 };
 
-export default Portfolio;
+export default Projects;
