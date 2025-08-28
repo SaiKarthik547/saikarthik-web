@@ -195,5 +195,5 @@ export const splineBackgrounds = {
   skills: "https://my.spline.design/claritystream-qjV0FJtxmNUmDvDLs5BCnuPW/",
   services: "https://my.spline.design/particlenebula-955YI6OdJAaPz7Bb30TF60am/",
   portfolio: "https://my.spline.design/customlinepathwithcustommatcap-X6VPZfKQNGpP25x69wylbfNI/",
-  contact: "https://my.spline.design/galaxy-AB0ig2ZqPyHHUtBuHV8YtNLK/"
+  contact: "https://my.spline.design/faded-a3LJpHxQCG5DKMKPIrJC3s54/"
 };
